@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build MPI Program",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-I", "D:/MSMPI/Include",
+        "MpiQuickSort.c",
+        "-L", "D:/MSMPI/Lib/x64",
+        "-lmsmpi",
+        "-o", "MpiQuickSort.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run MPI Program (4 processes)",
+      "type": "shell",
+      "command": "mpiexec",
+      "args": [
+        "-n", "4",
+        "./MpiQuickSort.exe"
+      ],
+      "dependsOn": ["Build MPI Program"]
+    }
+  ]
+}

@@ -3,8 +3,7 @@
 #include <time.h>
 #include <omp.h>
 
-#define N 10000000      
-#define NUM_THREADS 4     
+#define N 10000000 
 
 void swap(int* a, int* b) {
     int temp = *a;
@@ -45,9 +44,14 @@ void quicksort_parallel(int arr[], int left, int right, int depth) {
 }
 
 int main() {
+    int num_threads;
+
+    printf("Nhap so luong: ");
+    scanf("%d", &num_threads);
+
     int* arr = (int*)malloc(N * sizeof(int));
     if (!arr) {
-        printf("Không thể cấp phát bộ nhớ!\n");
+        printf("Khong the cap phat bo nho!\n");
         return 1;
     }
 
@@ -56,7 +60,7 @@ int main() {
         arr[i] = rand();
     }
 
-    omp_set_num_threads(NUM_THREADS);
+    omp_set_num_threads(num_threads);
 
     double start = omp_get_wtime();
 
@@ -68,7 +72,7 @@ int main() {
 
     double end = omp_get_wtime();
 
-    printf("Đã sắp xếp %d phần tử bằng %d luồng trong %.6f giây\n", N, NUM_THREADS, end - start);
+    printf("Da sap xep %d phan tu bang %d luong trong %.6f giay \n", N, num_threads, end - start);
 
     free(arr);
     return 0;
